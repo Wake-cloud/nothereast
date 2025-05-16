@@ -1,0 +1,196 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: 0 0% 0%;  /* Black */
+  --foreground: 0 0% 100%;  /* White */
+  --muted: 0 0% 15%;  /* Dark Gray */
+  --muted-foreground: 0 0% 80%;  /* Light Gray */
+  --popover: 0 0% 5%;  /* Very Dark Gray */
+  --popover-foreground: 0 0% 100%;  /* White */
+  --card: 0 0% 10%;  /* Dark Gray */
+  --card-foreground: 0 0% 100%;  /* White */
+  --border: 0 0% 20%;  /* Gray */
+  --input: 0 0% 20%;  /* Gray */
+  --primary: 90 50% 50%;  /* Green from logo (#88c13e) */
+  --primary-foreground: 0 0% 100%;  /* White */
+  --secondary: 0 0% 100%;  /* White */
+  --secondary-foreground: 0 0% 0%;  /* Black */
+  --accent: 90 50% 50%;  /* Green from logo */
+  --accent-foreground: 0 0% 100%;  /* White */
+  --destructive: 0 84.2% 60.2%;
+  --destructive-foreground: 0 0% 98%;
+  --ring: 90 50% 50%;  /* Green from logo */
+  --radius: 0.5rem;
+
+  /* Chart colors are maintained for compatibility */
+  --chart-1: 90 50% 50%;  /* Green from logo */
+  --chart-2: 0 0% 100%;  /* White */
+  --chart-3: 0 0% 0%;  /* Black */
+  --chart-4: 100 70% 50%;  /* Lighter green variant */
+  --chart-5: 80 60% 45%;  /* Darker green variant */
+}
+
+.dark {
+  /* Same as root since we're using a dark theme by default */
+  --background: 0 0% 0%;  /* Black */
+  --foreground: 0 0% 100%;  /* White */
+  --muted: 0 0% 15%;  /* Dark Gray */
+  --muted-foreground: 0 0% 80%;  /* Light Gray */
+  --popover: 0 0% 5%;  /* Very Dark Gray */
+  --popover-foreground: 0 0% 100%;  /* White */
+  --card: 0 0% 10%;  /* Dark Gray */
+  --card-foreground: 0 0% 100%;  /* White */
+  --border: 0 0% 20%;  /* Gray */
+  --input: 0 0% 20%;  /* Gray */
+  --primary: 90 50% 50%;  /* Green from logo (#88c13e) */
+  --primary-foreground: 0 0% 100%;  /* White */
+  --secondary: 0 0% 100%;  /* White */
+  --secondary-foreground: 0 0% 0%;  /* Black */
+  --accent: 90 50% 50%;  /* Green from logo */
+  --accent-foreground: 0 0% 100%;  /* White */
+  --destructive: 0 84.2% 60.2%;
+  --destructive-foreground: 0 0% 98%;
+  --ring: 90 50% 50%;  /* Green from logo */
+  --radius: 0.5rem;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply font-sans antialiased bg-background text-foreground;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-bold;
+  }
+}
+
+/* Custom styles for the image comparison slider */
+.image-comparison {
+  position: relative;
+  width: 100%;
+  height: 300px;
+  overflow: hidden;
+  border-radius: 0 0 0.5rem 0.5rem;
+}
+
+.image-comparison .before,
+.image-comparison .after {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+}
+
+.image-comparison .before::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(rgba(83, 39, 8, 0.7), rgba(0, 0, 0, 0.5));
+  mix-blend-mode: multiply;
+  box-shadow: inset 0 0 20px 5px rgba(0, 0, 0, 0.6);
+  filter: contrast(1.2) saturate(1.3) brightness(0.8);
+}
+
+/* Different overlay effects for different types of images */
+.image-comparison.car .before::after {
+  background: linear-gradient(rgba(139, 69, 19, 0.6), rgba(165, 42, 42, 0.5)); 
+  filter: sepia(0.5) contrast(1.2) saturate(1.1);
+}
+
+.image-comparison.coin .before::after {
+  background: linear-gradient(rgba(72, 72, 72, 0.7), rgba(30, 30, 30, 0.6));
+  filter: grayscale(0.7) contrast(1.3) brightness(0.7);
+}
+
+.image-comparison.graffiti .before::after {
+  background: linear-gradient(rgba(50, 50, 50, 0.3), rgba(30, 30, 30, 0.3));
+  filter: contrast(1.1) saturate(1.2);
+}
+
+.image-comparison.metal .before::after {
+  background: linear-gradient(rgba(139, 69, 19, 0.5), rgba(83, 39, 8, 0.6));
+  filter: contrast(1.3) saturate(1.2) brightness(0.8);
+}
+
+.image-comparison .after {
+  width: 50%;
+  border-right: 3px solid white;
+}
+
+.label {
+  position: absolute;
+  bottom: 10px;
+  padding: 5px 10px;
+  background-color: rgba(0,0,0,0.7);
+  color: white;
+  font-weight: bold;
+  border-radius: 4px;
+}
+
+.label.before-label {
+  right: 10px;
+}
+
+.label.after-label {
+  left: 10px;
+}
+
+.slider {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 3px;
+  background: white;
+  cursor: ew-resize;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transform: translateX(-50%);
+}
+
+.slider-button {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 0 10px rgba(0,0,0,0.3);
+}
+
+/* Timeline styles for process section */
+.timeline-container {
+  position: relative;
+}
+
+.timeline-container::after {
+  content: '';
+  position: absolute;
+  width: 3px;
+  background-color: hsl(var(--muted));
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  margin-left: -1.5px;
+}
+
+@media (max-width: 768px) {
+  .timeline-container::after {
+    left: 20px;
+  }
+}
